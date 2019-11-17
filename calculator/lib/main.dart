@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
           output += ".";
         }
         break;
-      case "N":
+      case "±":
         //Toast functionality not available
         break;
       case "=":
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         }
         //Clean output if it contain text,reset the text
-        RegExp regExp=RegExp('^[a-zA-Z]*');
+        RegExp regExp = RegExp('^[a-zA-Z]*\$');
         if (regExp.hasMatch(output)) {
           print("Matched");
           output = "";
@@ -86,6 +86,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   double getCalculatedOutput() {
+    //If no operator don't do anything
+    if (operator == null) {
+      return double.parse(output);
+    }
+    //Depend upon operator do calculation
     switch (operator) {
       case "+":
         //add the number
@@ -153,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Row(
                   children: <Widget>[
                     createButton('C', 1),
-                    createButton('N', 1),
+                    createButton('±', 1),
                     createButton('%', 1),
                     createButton('÷', 1)
                   ],
