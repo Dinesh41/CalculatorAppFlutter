@@ -1,4 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+/*
+#1f3147 -Bg Color 39 57 69
+#817f82 -Bg 1 12,22,37
+#5f6867 -Button Bg 1 83 ,91 ,94
+#5f6867 -Button Bg 2 28 ,85 ,115
+#817f82 -Button Bg 3 124 ,122 ,125
+*/
 
 void main() => runApp(MyApp());
 
@@ -7,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(primaryColor: Color.fromRGBO(39, 57, 79, 1)),
       home: MyHomePage(),
     );
   }
@@ -85,9 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
         }
         output += buttonText;
     }
-    setState(() {
-      //To refresh the widget
-    });
   }
 
   double getCalculatedOutput() {
@@ -117,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Widget createButton(buttonText, int flex) {
+  Widget createButton(buttonText, int flex, Color buttonColor) {
     return Expanded(
       flex: flex,
       child: FlatButton(
@@ -126,8 +133,12 @@ class _MyHomePageState extends State<MyHomePage> {
           buttonText,
           style: TextStyle(fontSize: 25),
         ),
-        onPressed: () => onButtonPressed(buttonText),
-        color: Colors.blueGrey,
+        onPressed: () {
+          setState(() {
+            onButtonPressed(buttonText);
+          });
+        },
+        color: buttonColor,
         textColor: Colors.white,
       ),
     );
@@ -137,69 +148,76 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromRGBO(39, 57, 79, 1),
       body: Container(
         width: double.infinity,
         child: Column(
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-              child: Text(
-                output,
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40),
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: Color.fromRGBO(10, 18, 31, 1),
+                padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
+                width: double.infinity,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Text(
+                    output,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 40),
+                  ),
+                ),
               ),
             ),
             Expanded(
-              child: Divider(),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    createButton('C', 1),
-                    createButton('±', 1),
-                    createButton('%', 1),
-                    createButton('÷', 1)
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    createButton('7', 1),
-                    createButton('8', 1),
-                    createButton('9', 1),
-                    createButton('x', 1)
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    createButton('4', 1),
-                    createButton('5', 1),
-                    createButton('6', 1),
-                    createButton('-', 1)
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    createButton('1', 1),
-                    createButton('2', 1),
-                    createButton('3', 1),
-                    createButton('+', 1)
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    createButton('0', 2),
-                    createButton('.', 1),
-                    createButton('=', 1),
-                  ],
-                ),
-              ],
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      createButton('C', 1, Color.fromRGBO(85, 90, 94, 1)),
+                      createButton('±', 1, Color.fromRGBO(85, 90, 94, 1)),
+                      createButton('%', 1, Color.fromRGBO(85, 90, 94, 1)),
+                      createButton('÷', 1, Color.fromRGBO(28, 85, 115, 1))
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      createButton('7', 1, Color.fromRGBO(124, 122, 125, 1)),
+                      createButton('8', 1, Color.fromRGBO(124, 122, 125, 1)),
+                      createButton('9', 1, Color.fromRGBO(124, 122, 125, 1)),
+                      createButton('x', 1, Color.fromRGBO(28, 85, 115, 1))
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      createButton('4', 1, Color.fromRGBO(124, 122, 125, 1)),
+                      createButton('5', 1, Color.fromRGBO(124, 122, 125, 1)),
+                      createButton('6', 1, Color.fromRGBO(124, 122, 125, 1)),
+                      createButton('-', 1, Color.fromRGBO(28, 85, 115, 1))
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      createButton('1', 1, Color.fromRGBO(124, 122, 125, 1)),
+                      createButton('2', 1, Color.fromRGBO(124, 122, 125, 1)),
+                      createButton('3', 1, Color.fromRGBO(124, 122, 125, 1)),
+                      createButton('+', 1, Color.fromRGBO(28, 85, 115, 1))
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      createButton('0', 2, Color.fromRGBO(124, 122, 125, 1)),
+                      createButton('.', 1, Color.fromRGBO(85, 90, 94, 1)),
+                      createButton('=', 1, Color.fromRGBO(28, 85, 115, 1)),
+                    ],
+                  ),
+                ],
+              ),
             )
           ],
         ),
