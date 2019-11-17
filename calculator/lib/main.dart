@@ -28,6 +28,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void onButtonPressed(String buttonText) {
     print(buttonText);
+    //Clean output if it contain text,reset the text
+    RegExp regExp = RegExp('^[a-zA-Z]*\$');
+    if (regExp.hasMatch(output)) {
+      print("Matched");
+      output = "0";
+    }
     switch (buttonText) {
       case "C":
         //Clear the data
@@ -45,6 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
         num1 = double.parse(output);
         operator = buttonText;
         output = "0";
+        break;
+      case '±':
+        //change number to opposite sign
+        double currentOutput = double.parse(output);
+        output = (currentOutput > 0) ? "-$output" : output.substring(1);
         break;
       case ".":
         //Insert . if not already exist
@@ -71,12 +82,6 @@ class _MyHomePageState extends State<MyHomePage> {
           //If its already 0 don't append the number
           output = buttonText;
           break;
-        }
-        //Clean output if it contain text,reset the text
-        RegExp regExp = RegExp('^[a-zA-Z]*\$');
-        if (regExp.hasMatch(output)) {
-          print("Matched");
-          output = "";
         }
         output += buttonText;
     }
@@ -204,7 +209,6 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 //TODO
-//1. decimal bug is there
 //2. One operation missing
 //3. UI perfection
 //4. Add additional feature
