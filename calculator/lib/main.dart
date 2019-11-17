@@ -1,14 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/*
-#1f3147 -Bg Color 39 57 69
-#817f82 -Bg 1 12,22,37
-#5f6867 -Button Bg 1 83 ,91 ,94
-#5f6867 -Button Bg 2 28 ,85 ,115
-#817f82 -Button Bg 3 124 ,122 ,125
-*/
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -127,7 +119,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createButton(buttonText, int flex, Color buttonColor) {
     return Expanded(
       flex: flex,
-      child: FlatButton(
+      child: MaterialButton(
+        shape: RoundedRectangleBorder(
+            side: BorderSide(width: 2, color: Color.fromRGBO(39, 57, 79, 1)),
+            borderRadius: BorderRadius.circular(10)),
         padding: EdgeInsets.all(15),
         child: Text(
           buttonText,
