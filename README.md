@@ -1,4 +1,4 @@
 # CalculatorAppFlutter
 Calculator app using flutter
-![Mobile](./ScreenShots/mobile "mobile")
-![Tablet](./ScreenShots/tablet "tablet")
+![Mobile](./ScreenShots/mobile.png "mobile")
+![Tablet](./ScreenShots/tablet.png "tablet")
